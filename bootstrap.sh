@@ -23,7 +23,7 @@ apt-get install -y mysql-server php5-mysql -qq > /dev/null
 
 mysql_install_db
 
-aptitude -y install expect
+aptitude -y install expect > /dev/null
 
 SECURE_MYSQL=$(expect -c "
 set timeout 10
@@ -45,7 +45,7 @@ expect eof
 
 echo "$SECURE_MYSQL"
 
-aptitude -y purge expect
+aptitude -y purge expect > /dev/null
 
 apt-get -y install php5 libapache2-mod-php5 php5-mcrypt php5-gd libssh2-php -qq > /dev/null
 
@@ -59,3 +59,5 @@ service apache2 restart
 curl -O -s https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar > /dev/null
 chmod +x wp-cli.phar
 mv wp-cli.phar /usr/local/bin/wp
+
+locale-gen en_NZ.UTF-8
