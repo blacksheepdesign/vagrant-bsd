@@ -24,8 +24,8 @@ mysql -uroot -p$ROOTPASS -e "CREATE USER wp_user@localhost IDENTIFIED BY '${PASS
 mysql -uroot -p$ROOTPASS -e "GRANT ALL PRIVILEGES ON wordpress.* TO wp_user@localhost;"
 mysql -uroot -p$ROOTPASS -e "FLUSH PRIVILEGES;"
 
-wp core config --dbname=wordpress --dbuser=wp_user --dbpass=$PASSWDDB
-
 if [ -f /vagrant/dev-database.sql ]; then
-    mysql -u root -p$ROOTPASS < /vagrant/dev-database.sql
+    mysql wordpress -u root -p$ROOTPASS < /vagrant/dev-database.sql
 fi
+
+wp core config --dbname=wordpress --dbuser=wp_user --dbpass=$PASSWDDB
