@@ -8,6 +8,8 @@ if [ ! -d "/var/www/html/wp-admin" ]; then
     wp core download
 fi
 
+DB_PREFIX='none'
+
 if [ -f "/var/www/html/wp-config.php" ]; then
     # Control will enter here if $DIRECTORY doesn't exist.
     echo "wp-config.php already exists, creating backup..."
@@ -29,7 +31,7 @@ if [ -f /vagrant/dev-database.sql ]; then
     mysql wordpress -u root -p$ROOTPASS < /vagrant/dev-database.sql
 fi
 
-if [ -z ${DB_PREFIX+x} ]; then
+if [[ $DB_PREFIX != 'none' ]]; then
 	wp core config --dbname=wordpress --dbuser=wp_user --dbpass=$PASSWDDB --dbprefix=$DB_PREFIX
 else
 	wp core config --dbname=wordpress --dbuser=wp_user --dbpass=$PASSWDDB
